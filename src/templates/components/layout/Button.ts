@@ -12,7 +12,7 @@ interface LinkButtonProps extends ButtonProps {
   href?: string;
   target?: "_blank" | "_self" | "_parent" | "_top";
   rel?: string;
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "bold" | "subtle" | "minimal";
   size?: "default" | "big";
   outline?: boolean;
   fullWidth?: boolean;
@@ -94,8 +94,17 @@ const ButtonBase = styled.button<ButtonProps & { $special?: boolean }>\`
   }
 \`;
 
+// Public variant names decouple this component's API from Cherry's, whose
+// buttonStyles only accepts "primary" | "secondary" | "tertiary". Map the
+// public name back to Cherry's just before styling.
+const variantMap = {
+  bold: "primary",
+  subtle: "secondary",
+  minimal: "tertiary",
+} as const;
+
 function Button({
-  variant = "primary",
+  variant = "bold",
   size,
   outline,
   fullWidth,
@@ -119,7 +128,7 @@ function Button({
         href={href}
         target={resolvedTarget}
         rel={resolvedRel}
-        $variant={variant}
+        $variant={variantMap[variant]}
         $size={size}
         $outline={outline}
         $fullWidth={fullWidth}
@@ -134,7 +143,7 @@ function Button({
     <div>
       <ButtonBase
         {...props}
-        $variant={variant}
+        $variant={variantMap[variant]}
         $size={size}
         $outline={outline}
         $fullWidth={fullWidth}

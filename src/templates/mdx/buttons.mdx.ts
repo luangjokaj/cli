@@ -17,14 +17,14 @@ Buttons help users initiate actions or navigate to other pages. Use variants to 
 You can use the Button component directly within your MDX files without any import. The following examples show basic usage:
 
 \`\`\`html
-<Button>Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="tertiary">Tertiary</Button>
+<Button>Bold</Button>
+<Button variant="subtle">Subtle</Button>
+<Button variant="minimal">Minimal</Button>
 \`\`\`
 
-<Button>Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="tertiary">Tertiary</Button>
+<Button>Bold</Button>
+<Button variant="subtle">Subtle</Button>
+<Button variant="minimal">Minimal</Button>
 
 ### Sizes
 
@@ -86,9 +86,9 @@ Buttons can render as links when you provide an \`href\`.
   Controls visual emphasis.
 </Field>
 
-- **primary**
-- **secondary**
-- **tertiary**
+- **bold**
+- **subtle**
+- **minimal**
 
 <Field value="size" type="string">
   Controls the size of the button.
