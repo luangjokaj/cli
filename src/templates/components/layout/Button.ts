@@ -16,7 +16,6 @@ interface LinkButtonProps extends ButtonProps {
   size?: "default" | "big";
   outline?: boolean;
   fullWidth?: boolean;
-  special?: boolean;
   icon?: string;
   iconPosition?: "left" | "right";
   theme?: typeof localTheme;
@@ -30,7 +29,7 @@ interface LinkButtonProps extends ButtonProps {
 // ring (see GlobalStyles) so Cherry's buttonStyles owns the button's focus look.
 const StyledLinkButton = styled(Link).attrs({
   className: "button-link",
-})<LinkButtonProps & { $special?: boolean }>\`
+})<LinkButtonProps>\`
   \${({ theme, $variant, $size, $outline, $fullWidth, $error, disabled }) =>
     buttonStyles(
       theme,
@@ -44,12 +43,6 @@ const StyledLinkButton = styled(Link).attrs({
 
   \${({ theme, $outline, disabled }) =>
     !disabled && !$outline && \`color: \${theme.colors.surface};\`}
-
-  \${({ theme, $special, $outline, disabled }) =>
-    $special &&
-    !disabled &&
-    !$outline &&
-    \`background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});\`}
 
   & p {
     color: inherit !important;
@@ -62,7 +55,7 @@ const StyledLinkButton = styled(Link).attrs({
   }
 \`;
 
-const ButtonBase = styled.button<ButtonProps & { $special?: boolean }>\`
+const ButtonBase = styled.button<ButtonProps>\`
   \${({ theme, $variant, $size, $outline, $fullWidth, $error, disabled }) =>
     buttonStyles(
       theme,
@@ -76,12 +69,6 @@ const ButtonBase = styled.button<ButtonProps & { $special?: boolean }>\`
 
   \${({ theme, $outline, disabled }) =>
     !disabled && !$outline && \`color: \${theme.colors.surface};\`}
-
-  \${({ theme, $special, $outline, disabled }) =>
-    $special &&
-    !disabled &&
-    !$outline &&
-    \`background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});\`}
 
   & p {
     color: inherit !important;
@@ -99,7 +86,6 @@ function Button({
   size,
   outline,
   fullWidth,
-  special,
   icon,
   iconPosition = "left",
   theme: _theme = localTheme,
@@ -123,7 +109,6 @@ function Button({
         $size={size}
         $outline={outline}
         $fullWidth={fullWidth}
-        $special={special}
       >
         {iconPosition === "left" && icon && <Icon name={icon} size={16} />}
         {props.children}
@@ -138,7 +123,6 @@ function Button({
         $size={size}
         $outline={outline}
         $fullWidth={fullWidth}
-        $special={special}
       >
         {iconPosition === "left" && icon && <Icon name={icon} size={16} />}
         {props.children}
