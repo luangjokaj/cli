@@ -28,6 +28,11 @@ interface LinkButtonProps extends ButtonProps {
 // which resolves to white in both modes, for the filled, non-disabled case.
 // The "button-link" class opts this anchor out of the global a:focus-visible
 // ring (see GlobalStyles) so Cherry's buttonStyles owns the button's focus look.
+// $special swaps the flat fill for a brand gradient. It has to restate the
+// gradient under &:hover, since buttonStyles sets a solid hover background that
+// would otherwise flatten it, and drop the border color, since the gradient
+// paints under the border box — keeping Cherry's 2px sizing and focus ring
+// while losing the solid edge that clashes with the accent end.
 const StyledLinkButton = styled(Link).attrs({
   className: "button-link",
 })<LinkButtonProps & { $special?: boolean }>\`
@@ -49,7 +54,15 @@ const StyledLinkButton = styled(Link).attrs({
     $special &&
     !disabled &&
     !$outline &&
-    \`background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});\`}
+    \`
+      background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, \${theme.colors.accent}, \${theme.colors.accentStrong});
+        border-color: transparent;
+      }
+    \`}
 
   & p {
     color: inherit !important;
@@ -81,7 +94,15 @@ const ButtonBase = styled.button<ButtonProps & { $special?: boolean }>\`
     $special &&
     !disabled &&
     !$outline &&
-    \`background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});\`}
+    \`
+      background: linear-gradient(135deg, \${theme.colors.primary}, \${theme.colors.accent});
+      border-color: transparent;
+
+      &:hover {
+        background: linear-gradient(135deg, \${theme.colors.accent}, \${theme.colors.accentStrong});
+        border-color: transparent;
+      }
+    \`}
 
   & p {
     color: inherit !important;
